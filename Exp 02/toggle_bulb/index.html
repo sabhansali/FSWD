@@ -1,0 +1,75 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>  
+</head>
+<body>
+    <main>
+        <div class="container">
+            <h1>Toggle Bulb</h1>
+            <img class="bulb" src="unlitbulb.png" alt="">
+            <button>On</button>
+        </div>
+    </main>
+</body>
+</html>
+
+<style>
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    color: blue;
+}
+
+main{
+    height: 100%;
+    width: 100%;
+}
+
+.container{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.bulb{
+    width: 400px;
+    height: 450px;
+}
+button{
+    padding: 10px 40px;
+    font-size: 24px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 10px;
+}
+</style>
+<script>
+let btn = document.querySelector('button');
+let image = document.querySelector('img')
+let flag = 0;
+btn.addEventListener("click", function(){
+    if(flag == 0){
+        btn.innerHTML = "Off";
+        flag = 1;
+        image.src = "litbulb.png";
+    }
+    else{
+        btn.innerHTML = "On";
+        flag = 0;
+        image.src = "unlitbulb.png";
+    }    
+})
+</script>

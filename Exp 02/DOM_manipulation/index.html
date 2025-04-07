@@ -1,0 +1,72 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation</title>
+    <style>
+        body{ 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+        }
+        #container{ 
+            margin-top: 20px; 
+        }
+        #box1{
+            background-color: blueviolet;
+        }
+        #box2{
+            background-color: chocolate;
+        }
+        .box { 
+            padding: 10px; 
+            border: 1px solid black; 
+            margin: 5px; 
+            display: inline-block; 
+        }
+    </style>
+</head>
+<body>
+    <h2>DOM Manipulation Example</h2>
+    <div id="container">
+        <div id="box1" class="box">Box 1</div>
+        <div id="box2" class="box">Box 2</div>
+    </div>
+    <button onclick="addElement()">Add Element</button>
+    <button onclick="removeElement()">Remove Element</button>
+    <button onclick="replaceElement()">Replace Element</button>
+
+    <script>
+        function addElement() {
+            const newDiv = document.createElement("div"); 
+            newDiv.className = "box"; 
+            newDiv.innerText = "New Box"; 
+            document.getElementById("container").appendChild(newDiv); 
+        }
+
+        function removeElement() {
+            const elementToRemove = document.getElementById("box1"); 
+            if (elementToRemove) {
+                elementToRemove.remove(); 
+            } else {
+                alert("Element already removed!");
+            }
+        }
+
+        function replaceElement() {
+            const elementToReplace = document.getElementById("box2"); 
+            if (elementToReplace) {
+                const newElement = document.createElement("div"); 
+                newElement.className = "box"; 
+                newElement.innerText = "Replaced Box"; 
+                elementToReplace.replaceWith(newElement); 
+            } 
+            else {
+                alert("Element not found!");
+            }
+        }
+    </script>
+
+</body></html>

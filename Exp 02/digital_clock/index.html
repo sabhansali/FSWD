@@ -1,0 +1,45 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        body{
+            background-color: beige;
+            transition: background-color 1s ease;
+        }
+        h2{
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 100px;
+        }
+        #clock {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Digital Clock</h2>
+    <div id="clock"></div>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            document.getElementById("clock").innerText = now.toLocaleTimeString();
+            
+            // Change background color based on seconds
+            const seconds = now.getSeconds();
+            const colors = ["#f5e1e1", "#e1f5e1", "#e1e1f5", "#f5f5e1", "#f5e1f5", "#e1f5f5"];
+            const colorIndex = Math.floor(seconds / 10) % colors.length;
+            document.body.style.backgroundColor = colors[colorIndex];
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>

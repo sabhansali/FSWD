@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+   
+
+ <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .invalid {
+            border-color: red;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h2>User Registration</h2>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="firstname">First Name:</label>
+                <input type="text" id="firstname" name="firstname" pattern="[A-Za-z]+" required>
+                <div id="firstnameError" class="error">Only alphabets are allowed</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+                <div id="dobError" class="error">Please select a valid date</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <div id="emailError" class="error">Please enter a valid email address</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="contact">Contact Number:</label>
+                <input type="text" id="contact" name="contact" pattern="[0-9]{10}" required>
+                <div id="contactError" class="error">Please enter a 10-digit number</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="username">Username (6 characters with at least 1 uppercase, 1 lowercase and 1 digit):</label>
+                <input type="text" id="username" name="username" required minlength="6" maxlength="6">
+                <div id="usernameError" class="error">Username must be 6 characters with at least 1 uppercase letter, 1 lowercase letter, and 1 digit</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        const firstname = document.getElementById('firstname');
+        const dob = document.getElementById('dob');
+        const email = document.getElementById('email');
+        const contact = document.getElementById('contact');
+        const username = document.getElementById('username');
+        
+        // Show error message and highlight the field
+        function showError(input, errorId) {
+            input.classList.add('invalid');
+            document.getElementById(errorId).style.display = 'block';
+        }
+        
+        // Hide error message and remove highlight
+        function hideError(input, errorId) {
+            input.classList.remove('invalid');
+            document.getElementById(errorId).style.display = 'none';
+        }
+        
+        // Firstname validation (only alphabets)
+        firstname.addEventListener('input', function() {
+            const regex = /^[A-Za-z]+$/;
+            
+            if (!regex.test(this.value) && this.value !== '') {
+                showError(this, 'firstnameError');
+            } else {
+                hideError(this, 'firstnameError');
+            }
+        });
+        
+        // Contact validation (only 10 digits)
+        contact.addEventListener('input', function() {
+            const regex = /^[0-9]{1,10}$/;
+            
+            if (!regex.test(this.value) && this.value !== '') {
+                showError(this, 'contactError');
+            } else {
+                hideError(this, 'contactError');
+            }
+        });
+        
+        // Username validation (6 chars, 1 uppercase, 1 lowercase, 1 digit)
+        username.addEventListener('input', function() {
+            const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6}$/;
+            
+            if (!regex.test(this.value) && this.value !== '') {
+                showError(this, 'usernameError');
+            } else {
+                hideError(this, 'usernameError');
+            }
+        });
+        
+        // Email validation
+        email.addEventListener('input', function() {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!regex.test(this.value) && this.value !== '') {
+                showError(this, 'emailError');
+            } else {
+                hideError(this, 'emailError');
+            }
+        });
+        
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            let isValid = true;
+            
+            // Check firstname
+            if (!/^[A-Za-z]+$/.test(firstname.value)) {
+                showError(firstname, 'firstnameError');
+                isValid = false;
+            }
+            
+            // Check contact
+            if (!/^[0-9]{10}$/.test(contact.value)) {
+                showError(contact, 'contactError');
+                isValid = false;
+            }
+            
+            // Check username
+            if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6}$/.test(username.value)) {
+                showError(username, 'usernameError');
+                isValid = false;
+            }
+            
+            // Check email
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                showError(email, 'emailError');
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+                alert("Please correct the errors in the form");
+            } else {
+                alert("Registration successful!");
+            }
+        });
+    </script>
+</body>
+</html>

@@ -4,12 +4,11 @@ function runGame(){
     let chances = 4;
     while(chances!=0){
         if(user_no == number){
-            alert("Correct answer!");
-            break; 
+            console.log("Correct answer!"); 
         }
         else if(user_no < number){
             if(number-user_no <= 10){
-                user_no = prompt(`${number}Very close! Enter a slightly larger number.\nChances remaining:${chances}`)
+                user_no = prompt(`Very close! Enter a slightly larger number.\nChances remaining:${chances}`)
                 
             }
             else{
