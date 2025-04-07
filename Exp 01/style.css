@@ -1,0 +1,157 @@
+#logo{
+    color: #FEFAE0;
+    margin-top: 0px;
+    text-align: left;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.navbar a{
+    text-align: end;
+    color: #b6be99;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    margin-left: 2rem;
+}
+
+.navbar a:hover {
+    color: #BC6C25;
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    width: 100%;
+}
+
+.footer p{
+    color: #b6be99;
+}
+
+body{
+    background-color: #FEFAE0;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 150;
+    font-style: normal;
+}
+
+.index-title{
+    color: #e8edd7;
+    text-align: center;
+}
+
+.projects{
+    background-color: #606C38;
+    color: #f7c081;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 800px;
+    padding: 1rem;
+}
+
+.projects p{
+    font-weight: 400;
+}
+
+.projects:hover {
+    transform: translateY(-5px);
+    background-color: #73843c;
+}
+
+.projects h3 {
+    padding: 1rem;
+    color: #283618;
+    margin: 0;
+}
+
+.projects a{
+    color: #DDA15E;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.projects img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .navbar a {
+        margin: 0.5rem;
+    }
+
+    .projects {
+        margin: 1rem;
+    }
+
+    .projects img {
+        height: 200px;
+    }
+
+    .index-title {
+        font-size: 2rem;
+        margin: 1rem 0;
+    }
+}
+
+#red{
+    color:red;
+}
+
+#blue{
+    color: cornflowerblue;
+}
+
+#orange{
+    color:orange
+}
+
+#green{
+    color:green;
+}
+
+#yellow{
+    color:yellow;
+}
+
+.color-title{
+    font-weight: normal;
+}
+
+.colors{
+    height: 200px;
+    width: 200px;
+}
+
+
+body {
+    background-color: #283618;
+    color: #283618;
+    line-height: 1.6;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #606C38;
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React Todo List Preview</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <style>
+        .todo-app {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        input {
+            flex-grow: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+        }
+        
+        form button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        form button:hover {
+            background-color: #45a049;
+        }
+        
+        .task-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .task-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            margin: 8px 0;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .task-list li.completed {
+            border-left-color: #999;
+            background-color: #f1f1f1;
+        }
+        
+        .task-list li button {
+            padding: 5px 10px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .task-list li button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const TodoList = () => {
+            const [tasks, setTasks] = React.useState([
+                { id: 1, text: "Learn React", completed: true },
+                { id: 2, text: "Build a Todo App", completed: false }
+            ]);
+            const [newTask, setNewTask] = React.useState('');
+            
+            // Add a new task
+            const addTask = () => {
+                if (newTask.trim() !== '') {
+                    setTasks([...tasks, { id: Date.now(), text: newTask, completed: false }]);
+                    setNewTask('');
+                }
+            };
+            
+            // Delete a task
+            const deleteTask = (taskId) => {
+                setTasks(tasks.filter(task => task.id !== taskId));
+            };
+            
+            // Toggle task completion status
+            const toggleComplete = (taskId) => {
+                setTasks(tasks.map(task =>
+                    task.id === taskId ? { ...task, completed: !task.completed } : task
+                ));
+            };
+            
+            // Handle input change
+            const handleInputChange = (e) => {
+                setNewTask(e.target.value);
+            };
+            
+            // Handle form submission
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                addTask();
+            };
+            
+            return (
+                <div className="todo-app">
+                    <h1>To-Do List</h1>
+                    
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            value={newTask}
+                            onChange={handleInputChange}
+                            placeholder="Add a new task"
+                        />
+                        <button type="submit">Add Task</button>
+                    </form>
+                    
+                    <ul className="task-list">
+                        {tasks.map(task => (
+                            <li key={task.id} className={task.completed ? 'completed' : ''}>
+                                <span 
+                                    onClick={() => toggleComplete(task.id)}
+                                    style={{ 
+                                        textDecoration: task.completed ? 'line-through' : 'none',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    {task.text}
+                                </span>
+                                <button onClick={() => deleteTask(task.id)}>Delete</button>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            );
+        };
+        
+        ReactDOM.render(<TodoList />, document.getElementById('root'));
+    </script>
+</body>
+</html>
